@@ -1,0 +1,19 @@
+﻿@using TestSeminar.Models.Binding
+@model ProductCategoryBinding
+
+@using (Html.BeginForm())
+{ 
+    <div class="form-group">
+        @Html.LabelFor(x=>x.Title)
+        @Html.TextBoxFor(x=> x.Title, new {@class = "form-control" })
+
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x=>x.Description)
+        @Html.TextBoxFor(x=> x.Description, new {@class = "form-control", Required = true, placeholder="Unesi opis"  })
+    </div>    
+
+    <input type="submit" class="btn btn-primary mt-3" value="Pošalji">
+    @Html.ActionLink("Natrag","ProductAdministration","Admin",null,new {@class = "btn btn-primary mt-3"})
+}
+

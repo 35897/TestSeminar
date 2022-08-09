@@ -1,0 +1,83 @@
+﻿@using TestSeminar.Models.ViewModel
+@using TestSeminar.Services.Interface
+@model ICollection<ApplicationUserViewModel>
+@inject IUserService userService
+<h1>Korisnici</h1>
+@Html.ActionLink("Dodaj novog korisnika","AddUser","Admin",null,new {@class = "btn btn-primary"})
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Rola
+            </th>
+            @*<th>
+                Username
+            </th>*@
+            <th>
+                Ime
+            </th>
+            <th>
+                Prezime
+            </th>
+            <th>
+                Datum rođenja
+            </th>
+            <th>
+                E-mail
+            </th>
+            <th>
+                Adresa
+            </th>
+            <th>
+                Uređivanje
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.OrderBy(x=>x.Role))
+        {
+            <tr class="align-middle">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Role)
+                </td>
+
+               @* <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DOB)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @foreach (var address in item.Address)
+                    {
+                        @Html.DisplayFor(modelItem => address.Street)
+                        <br>
+                        @Html.DisplayFor(modelItem => address.ZipCode) 
+                        <span>&nbsp;</span>
+                        @Html.DisplayFor(modelItem => address.City)
+                        <br>
+                        @Html.DisplayFor(modelItem => address.Country)
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Uredi","UpdateUser","Admin",new {id= item.Id},new {@class = "btn btn-primary"})
+
+                    @if (item.Role != Roles.Admin)
+                    {
+                        @Html.ActionLink("Obriši","DeleteUser","Admin",new {id= item.Id},new {@class = "btn btn-primary"})
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

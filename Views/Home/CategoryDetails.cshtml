@@ -1,0 +1,58 @@
+﻿@model ICollection<TestSeminar.Models.ViewModel.ProductViewModel>
+@if(@Model.FirstOrDefault() != null) {
+<h1>Kategorija:          
+<span>@Model.FirstOrDefault().ProductCategory.Title </span>
+</h1>
+
+<div>
+    <hr />   
+    <table class="table table-striped">
+    <thead>
+        <tr>
+      @*      <th scope="col">#</th>*@            
+            <th scope="col">Naziv</th>
+            <th scope="col">Opis</th>
+            <th scope="col">Cijena</th>
+            <th scope="col">Detalji</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                @*<th scope="row">@counter</th>*@                
+                <td>@item.Title</td>
+                <td>@item.Description</td>
+                <td>@item.Price</td>                
+                <td>
+                    @if(item.Quantity > 0)
+                    {
+                        <a href="@Url.Action("ProductDetails", "Home",new {id = item.Id})" class="btn btn-success">Detalji</a>
+                    }
+                    else
+                    {
+                        <span>Proizvod nije dostupan</span>
+                    }
+
+                </td>
+            </tr>            
+        }
+
+    </tbody>
+</table>
+
+    
+   
+</div>
+<div>
+    @Html.ActionLink("Natrag","Index","Home",null,new {@class = "btn btn-primary"})
+</div>
+}
+else
+{
+<h1>Kategorija je prazna. </h1>
+<div>
+    @Html.ActionLink("Natrag","Index","Home",null,new {@class = "btn btn-primary"})
+</div>
+}

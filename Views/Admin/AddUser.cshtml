@@ -1,0 +1,82 @@
+﻿@using TestSeminar.Services.Interface
+@model TestSeminar.Models.Binding.ApplicationUserCreateBinding
+@inject IUserService userService
+
+
+@{
+    var roles =await userService.GetUserRoles();
+}
+
+<h1>Dodaj korisnika</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddUser">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>           
+            <label asp-for="RoleId" class="control-label">Role</label>
+            <div class="form-group">
+                <select name="RoleId" class="form-control">
+                    @foreach (var item in roles)
+                    {
+                        <option value="@item.Id">
+                            @item.Name
+                        </option>
+                    } 
+                </select>               
+                
+            </div>
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label"></label>
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label"></label>
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DOB" class="control-label"></label>
+                <input asp-for="DOB" class="form-control" />
+                <span asp-validation-for="DOB" class="text-danger"></span>
+            </div>
+             <div class="form-group">
+                <label asp-for="UserAddress.Street" class="control-label"></label>
+                <input asp-for="UserAddress.Street" class="form-control" />
+                <span asp-validation-for="UserAddress.Street" class="text-danger"></span>
+            </div>
+             <div class="form-group">
+                <label asp-for="UserAddress.ZipCode" class="control-label"></label>
+                <input asp-for="UserAddress.ZipCode" class="form-control" />
+                <span asp-validation-for="UserAddress.ZipCode" class="text-danger"></span>
+            </div>
+             <div class="form-group">
+                <label asp-for="UserAddress.City" class="control-label"></label>
+                <input asp-for="UserAddress.City" class="form-control" />
+                <span asp-validation-for="UserAddress.City" class="text-danger"></span>
+            </div>
+              <div class="form-group">
+                <label asp-for="UserAddress.Country" class="control-label"></label>
+                <input asp-for="UserAddress.Country" class="form-control" />
+                <span asp-validation-for="UserAddress.Country" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3">
+                <input type="submit" value="Pošalji" class="btn btn-primary" />
+                @Html.ActionLink("Natrag","UserAdministration","Admin",null,new {@class = "btn btn-primary"})
+            </div>
+        </form>
+    </div>
+</div>
+
+

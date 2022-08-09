@@ -1,0 +1,92 @@
+﻿@using TestSeminar.Models.ViewModel
+@using TestSeminar.Services.Interface
+@model ApplicationUserViewModel
+@inject IUserService userService
+
+
+@{
+    var roles = await userService.GetUserRoles();
+}
+
+
+<h1>UpdateUser</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="UpdateUser">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <label asp-for="Role" class="control-label"></label>
+            <div class="form-group">
+                <select name="RoleId" class="form-control">
+                    @foreach (var item in roles)
+                    {
+                        if (item.Name == Model.Role)
+                        {
+                            <option selected value="@item.Id">
+                                @item.Name
+                            </option>
+                        }
+                        else
+                        {
+                            <option value="@item.Id">
+                                @item.Name
+                            </option>
+                        }
+
+                    }
+                </select>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label"></label>
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label"></label>
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DOB" class="control-label"></label>
+                <input asp-for="DOB" class="form-control" />
+                <span asp-validation-for="DOB" class="text-danger"></span>
+            </div>
+            @foreach (var address in Model.Address)
+            {
+                 <div class="form-group">
+            <label asp-for="@address.Street" class="control-label"></label>
+            <input asp-for="@address.Street" class="form-control" />
+            <span asp-validation-for="@address.Street" class="text-danger"></span>
+            </div>
+                <div class="form-group">
+            <label asp-for="@address.ZipCode" class="control-label"></label>
+            <input asp-for="@address.ZipCode" class="form-control" />
+            <span asp-validation-for="@address.ZipCode" class="text-danger"></span>
+            </div>
+                <div class="form-group">
+            <label asp-for="@address.City" class="control-label"></label>
+            <input asp-for="@address.City" class="form-control" />
+            <span asp-validation-for="@address.City" class="text-danger"></span>
+            </div>
+                <div class="form-group">
+            <label asp-for="@address.Country" class="control-label"></label>
+            <input asp-for="@address.Country" class="form-control" />
+            <span asp-validation-for="@address.Country" class="text-danger"></span>
+            </div>
+            }
+            
+
+            <div class="form-group mt-3">
+                <input type="submit" value="Spremi" class="btn btn-primary" />
+                @Html.ActionLink("Natrag","UserAdministration","Admin",null,new {@class = "btn btn-primary"})
+            </div>
+        </form>
+    </div>
+</div>
+

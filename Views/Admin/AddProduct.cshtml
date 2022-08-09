@@ -1,0 +1,44 @@
+﻿@using TestSeminar.Models.Binding
+@using TestSeminar.Services.Interface
+@model ProductBinding
+@inject IProductService productService
+
+@{
+    var productCategory = await productService.GetProductCategoriesAsync();
+}
+
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+         <label asp-for="ProductCategoryId" class="control-label">Odaberi kategoriju</label>
+        <select name="ProductCategoryId" class="form-select" aria-label="Default select example">
+            @foreach (var item in productCategory)
+            {
+                <option value="@item.Id">@item.Title</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(x=>x.Title)
+        @Html.TextBoxFor(x=> x.Title, new {@class = "form-control" })
+
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x=>x.Description)
+        @Html.TextBoxFor(x=> x.Description, new {@class = "form-control", Required = true, placeholder="Unesi opis"  })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x=>x.Quantity)
+        @Html.TextBoxFor(x=> x.Quantity, new {@class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x=>x.Price)
+        @Html.TextBoxFor(x=> x.Price, new {@class = "form-control" })
+    </div>
+    <div class="mt-3">
+    <input type="submit" class="btn btn-primary " value="Pošalji">
+    
+    @Html.ActionLink("Natrag","ProductAdministration","Admin",null,new {@class = "btn btn-primary"})
+    </div>
+}
