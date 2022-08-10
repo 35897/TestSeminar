@@ -8,5 +8,6 @@ namespace TestSeminar.Models.Binding
         public int Id { get; set; }
         public int ProductCategoryId { get; set; }
         public ProductCategoryViewModel ProductCategory { get; set; }
+        public IFormFile ProductImg { get; set; }
     }
 }

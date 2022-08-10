@@ -65,9 +65,20 @@ namespace TestSeminar.Services.Implementation
         {
             //dodat kategoriju
             var category = await db.ProductCategory.FirstOrDefaultAsync(x => x.Id == model.ProductCategoryId);
+            var oldImage = db.Product.FirstOrDefaultAsync(x => x.Id == model.Id).Result.ProductImgUrl;
+           
             var dbo = await db.Product.FindAsync(model.Id);
-            mapper.Map(model, dbo);            
-            dbo.ProductCategory = category;
+            var file = await fileStorageService.AddFileToStorage(model.ProductImg);
+            mapper.Map(model, dbo);   
+            if(model.ProductImg == null)
+            {
+                dbo.ProductImgUrl = oldImage;
+            }
+            else
+            {
+                dbo.ProductImgUrl = file.DownloadUrl;
+            }
+            dbo.ProductCategory = category;            
             await db.SaveChangesAsync();
             return mapper.Map<ProductViewModel>(dbo);
         }
