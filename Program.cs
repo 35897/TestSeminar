@@ -28,7 +28,9 @@ builder.Services.AddControllersWithViews();
 //servisi
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IFileStorageService, FileStorageService>();
 builder.Services.AddSingleton<IIdentityService, IdentityService>(); // jos negdje treba 
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 var app = builder.Build();
 

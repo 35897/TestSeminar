@@ -4,10 +4,11 @@ using System.Net.Mime;
 using TestSeminar.Data;
 using TestSeminar.Models.Dbo;
 using TestSeminar.Models.ViewModel;
+using TestSeminar.Services.Interface;
 
 namespace TestSeminar.Services.Implementation
 {
-    public class FileStorageService
+    public class FileStorageService : IFileStorageService
     {
         public readonly ApplicationDbContext db;
         private IWebHostEnvironment env;

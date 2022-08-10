@@ -12,16 +12,23 @@ namespace TestSeminar.Services.Implementation
     {
         private readonly ApplicationDbContext db;
         private readonly IMapper mapper;
-        public ProductService(ApplicationDbContext db, IMapper mapper)
+        private readonly IFileStorageService fileStorageService;
+        public ProductService(ApplicationDbContext db, IMapper mapper, IFileStorageService fileStorageService)
         {
-            this.db = db;            
+            this.db = db;
             this.mapper = mapper;
+            this.fileStorageService = fileStorageService;
         }
 
         //dodavanje proizvoda
-         public async Task<ProductViewModel> AddProductAsync(ProductBinding model)
+        public async Task<ProductViewModel> AddProductAsync(ProductBinding model)
         {
             var dbo = mapper.Map<Product>(model);
+            var file = await fileStorageService.AddFileToStorage(model.ProductImg);
+            if (file != null)
+            {
+                dbo.ProductImgUrl = file.DownloadUrl;
+            }
             var productCategory = await db.ProductCategory.FindAsync(model.ProductCategoryId);
             if (productCategory == null)
             {
@@ -32,8 +39,6 @@ namespace TestSeminar.Services.Implementation
             db.Product.Add(dbo);
             await db.SaveChangesAsync();    
             return mapper.Map<ProductViewModel>(dbo);
-
-
         }
 
         // dohvat proizvoda po id
