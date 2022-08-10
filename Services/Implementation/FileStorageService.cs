@@ -71,7 +71,7 @@ namespace TestSeminar.Services.Implementation
                     response.ContentDisposition = new ContentDisposition
                     {
                         FileName = dbo.FileName,
-                        Inline = false,
+                        Inline = false
                     };
                     response.FileStream = File.OpenRead(dbo.PhysicalPath);
                     response.Base64 = GetBase64FromPhysicalPath(dbo.PhysicalPath);

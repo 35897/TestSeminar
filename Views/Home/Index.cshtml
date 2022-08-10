@@ -14,6 +14,7 @@
             <th scope="col">Opis</th>
             <th scope="col">Cijena</th>
             <th scope="col">Detalji</th>
+            <th scope="col">Slika</th>
         </tr>
     </thead>
     <tbody>
@@ -23,7 +24,7 @@
         
         @foreach (var product in Model.OrderBy(x=>Guid.NewGuid()))
         {
-            <tr>
+            <tr class="align-middle">
                 <th scope="row">@counter</th>
                 <td>@product.ProductCategory.Title</td>
                 <td>@product.Title</td>
@@ -38,8 +39,8 @@
                     {
                         <span>Proizvod nije dostupan</span>
                     }
-
                 </td>
+                <td><img src="@product.ProductImgUrl" alt="@product.Title" height="100px"></td>
             </tr>
             counter++;
             if (counter > 10) return;
