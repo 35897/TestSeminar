@@ -19,6 +19,7 @@ namespace TestSeminar.Services.Implementation
 
                 CreateRoleAsync(Roles.Admin).Wait();
                 CreateRoleAsync(Roles.BasicUser).Wait();
+                CreateRoleAsync(Roles.NewUserRole).Wait();
 
                 //admin
                 CreateUserAsync(new ApplicationUser
