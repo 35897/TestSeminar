@@ -40,6 +40,9 @@ namespace TestSeminar.Mapping
 
             //roles
             CreateMap<IdentityRole, UserRolesViewModel>();
+
+            //slike
+            CreateMap<FileStorage, FileStorageViewModel>();
         }
 
 

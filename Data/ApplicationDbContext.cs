@@ -19,7 +19,7 @@ namespace TestSeminar.Data
         public DbSet<ProductCategory> ProductCategory { get; set; }
         public DbSet<TestSeminar.Models.ViewModel.ProductViewModel>? ProductViewModel { get; set; }
         
-        
+        public DbSet<FileStorage> FileStorage { get; set; } 
        
     }
 }
