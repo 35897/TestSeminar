@@ -16,7 +16,7 @@ namespace TestSeminar.Services.Interface
 
         Task<List<ProductViewModel>> GetProductsFromCategoryAsync(int id);
 
-        //Task<ProductViewModel> UpdateProductCategoryAsync(ProductUpdateBinding model);
-        //Task<ProductViewModel> DeleteProductCategory(int id);
+        Task<ProductCategoryViewModel> UpdateProductCategoryAsync(ProductCategoryUpdateBinding model);
+        Task DeleteProductCategory(int id);
     }
 }

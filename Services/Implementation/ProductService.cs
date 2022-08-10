@@ -127,5 +127,35 @@ namespace TestSeminar.Services.Implementation
             return dbo.Select(x => mapper.Map<ProductViewModel>(x)).ToList();
         }
 
+        //update kategorije proizvoda
+        public async Task<ProductCategoryViewModel> UpdateProductCategoryAsync(ProductCategoryUpdateBinding model)
+        {
+            
+            var dbo = await db.ProductCategory.FindAsync(model.Id);            
+            mapper.Map(model, dbo);
+          
+            await db.SaveChangesAsync();
+            return mapper.Map<ProductCategoryViewModel>(dbo);
+        }
+        //brisanje kategorije proizvoda
+        public async Task DeleteProductCategory(int id)
+        {
+            var dbo = await db.ProductCategory.FindAsync(id);
+            //var products = await db.Product
+            //    .Include(x => x.ProductCategory)
+            //    .Where(y => y.ProductCategory.Id == id)
+            //    .ToListAsync();
+            //foreach (var item in products)
+            //{
+            //    item.ProductCategory = new ProductCategory();
+            //}
+
+            if (dbo != null)
+            {
+                db.Remove(dbo);
+            }
+            await db.SaveChangesAsync();
+        }
+
     }
 }

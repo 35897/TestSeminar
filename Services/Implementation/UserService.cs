@@ -83,7 +83,7 @@ namespace TestSeminar.Services.Implementation
                 .Include(x=>x.Address)
                 .FirstOrDefaultAsync(x=>x.Id == model.Id);
 
-            var role = await db.Roles.FindAsync(model.RoleId);
+            var role = await db.Roles.FindAsync(model.RoleId);            
             if (role == null || dbo == null)
             {
                 return null;

@@ -50,6 +50,7 @@
             <th scope="col">#</th>
             <th>Naziv</th>
             <th>Opis</th>            
+            <th>Uređivanje</th>            
         </tr>
     </thead>
     <tbody>
@@ -62,6 +63,10 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
             </td> 
+             <td>
+                @Html.ActionLink("Uredi","UpdateProductCategory","Admin",new {id= item.Id},new {@class = "btn btn-primary"})
+                @Html.ActionLink("Obriši","DeleteProductCategory","Admin",new {id= item.Id},new {@class = "btn btn-primary"})
+            </td>  
         </tr>
         counterCat++;
 }

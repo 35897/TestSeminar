@@ -23,7 +23,8 @@ namespace TestSeminar.Mapping
             CreateMap<ProductCategoryBinding, ProductCategory>();
             CreateMap<ProductCategory, ProductCategoryViewModel>();
 
-
+            CreateMap<ProductCategoryViewModel, ProductCategoryUpdateBinding>();
+            CreateMap<ProductCategoryUpdateBinding, ProductCategory>();
             //mape za adresu kod prikaza korisnika
             CreateMap<AddressBinding, Address>();
             CreateMap<Address, AddressViewModel>();

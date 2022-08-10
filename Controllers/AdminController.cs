@@ -81,6 +81,31 @@ namespace TestSeminar.Controllers
             return RedirectToAction("ProductAdministration");
         }
 
+        public async Task<IActionResult> UpdateProductCategory(int id)
+        {
+            var product = await productService.GetProductCategoryAsync(id);
+            var model = mapper.Map<ProductCategoryUpdateBinding>(product);
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> UpdateProductCategory(ProductCategoryUpdateBinding model)
+        {
+            var product = await productService.UpdateProductCategoryAsync(model);
+            return RedirectToAction("ProductAdministration");
+        }
+        public async Task<IActionResult> DeleteProductCategory(int id)
+        {
+            var product = await productService.GetProductCategoryAsync(id);
+            var model = mapper.Map<ProductCategoryUpdateBinding>(product);
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteProductCategory(ProductCategoryUpdateBinding model)
+        {
+            await productService.DeleteProductCategory(model.Id);
+            return RedirectToAction("ProductAdministration");
+        }
         public async Task<IActionResult> UserAdministration()
         {
             var users = await userService.GetUsersAsync();
