@@ -43,6 +43,10 @@ namespace TestSeminar.Mapping
 
             //slike
             CreateMap<FileStorage, FileStorageViewModel>();
+            CreateMap<FileStorage, FileStorageExpendedViewModel>();
+
+            CreateMap<FileStorageViewModel, FileStorage>().ForMember(x => x.Id, y => y.Ignore());
+
         }
 
 
